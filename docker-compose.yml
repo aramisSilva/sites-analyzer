@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:alpine
+    ports:
+      - 5433:5432 #external port 5433 to avoid conflict with rede-acolhe that uses 5432
+    environment:
+      POSTGRES_USER: aramis
+      POSTGRES_DB: analyzer
+      POSTGRES_PASSWORD: password
+    volumes:
+      - analyzer_database:/var/lib/postgresql/data
+    networks:
+      - analyzer
+
+networks:
+    analyzer:
+        driver: bridge
+
+volumes:
+    analyzer_database:
+    redis:
